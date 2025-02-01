@@ -1,0 +1,9 @@
+fairseq/
+checkpoints/
+data/
+*.pyc
+__pycache__/
+*.h5
+*.pt
+*.log
+.DS_Store

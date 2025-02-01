@@ -1,0 +1,8 @@
+# Python >= 3.7
+torch>=1.6.0
+numpy
+sacrebleu
+h5py
+subword-nmt
+sentencepiece
+omegaconf>=2.0
