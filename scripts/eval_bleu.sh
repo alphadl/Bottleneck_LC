@@ -15,4 +15,6 @@ python "$ROOT/fairseq/fairseq_cli/generate.py" "$DATA" \
   --gen-subset test --beam 5 --max-tokens 8192 \
   --batch-size 128 > "$GEN/test.out" 2>"$GEN/test.log"
 grep ^H "$GEN/test.out" | cut -f3- > "$GEN/test.hyp"
-sacrebleu -i "$GEN/test.hyp" "${TEST_PREF}.${TGT}" 2>/dev/null || bleu=$(sacrebleu "${TEST_PREF}.${TGT}" -i "$GEN/test.hyp" 2>/dev/null) && echo "BLEU: $bleu"
+if [ -f "${TEST_PREF}.${TGT}" ]; then
+  sacrebleu "${TEST_PREF}.${TGT}" -i "$GEN/test.hyp" -b
+fi

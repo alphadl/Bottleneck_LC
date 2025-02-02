@@ -4,7 +4,7 @@ set -e
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 FAIRSEQ_SRC="${FAIRSEQ_SRC:-}"
 if [ -z "$FAIRSEQ_SRC" ]; then
-  for d in "$REPO_ROOT/../RLFW-NAT/fairseq_mask" "$REPO_ROOT/../RLFW-NAT.mono/fairseq_mask" "/Users/alphadl/git/RLFW-NAT/fairseq_mask"; do
+  for d in "$REPO_ROOT/../RLFW-NAT/fairseq_mask" "$REPO_ROOT/../RLFW-NAT.mono/fairseq_mask"; do
     if [ -d "$d" ] && [ -f "$d/fairseq/criterions/nat_loss.py" ]; then
       FAIRSEQ_SRC="$d"
       break

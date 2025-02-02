@@ -10,7 +10,7 @@ PAIR="${SRC}${TGT}"
 BPE_SIZE="${BPE_SIZE:-32000}"
 WORKERS="${WORKERS:-8}"
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-FAIRSEQ_PY="${FAIRSEQ_PY:-$ROOT/fairseq/fairseq_cli}"
+WORKERS="${WORKERS:-8}"
 
 mkdir -p "$DATA_DIR/$PAIR"
 cd "$DATA_DIR/$PAIR"

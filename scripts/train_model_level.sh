@@ -9,21 +9,13 @@ PRIOR_WEIGHT="${PRIOR_WEIGHT:-./data/${SRC}${TGT}/prior.h5}"
 PRIOR_SRC_VOCAB="${PRIOR_SRC_VOCAB:-./data/${SRC}${TGT}/databin/forward_KD/lc.${SRC}-${TGT}.${SRC}.vocab}"
 PRIOR_TGT_VOCAB="${PRIOR_TGT_VOCAB:-./data/${SRC}${TGT}/databin/forward_KD/lc.${SRC}-${TGT}.${TGT}.vocab}"
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-# Extract vocab from dict if lc.*.vocab not present
 DATABIN="${DATA}"
-[ ! -f "$PRIOR_SRC_VOCAB" ] && python -c "
-import sys
-with open('$DATABIN/dict.$SRC.txt') as f:
-    for line in f:
-        idx = line.rfind(' ')
-        print(line[:idx].strip() if idx>=0 else line.strip())
-" > "$PRIOR_SRC_VOCAB" 2>/dev/null || true
-[ ! -f "$PRIOR_TGT_VOCAB" ] && python -c "
-with open('$DATABIN/dict.$TGT.txt') as f:
-    for line in f:
-        idx = line.rfind(' ')
-        print(line[:idx].strip() if idx>=0 else line.strip())
-" > "$PRIOR_TGT_VOCAB" 2>/dev/null || true
+if [ ! -f "$PRIOR_SRC_VOCAB" ]; then
+  python "$ROOT/scripts/extract_vocab.py" "$DATABIN/dict.$SRC.txt" "$PRIOR_SRC_VOCAB" 2>/dev/null || true
+fi
+if [ ! -f "$PRIOR_TGT_VOCAB" ]; then
+  python "$ROOT/scripts/extract_vocab.py" "$DATABIN/dict.$TGT.txt" "$PRIOR_TGT_VOCAB" 2>/dev/null || true
+fi
 mkdir -p "$SAVE"
 python "$ROOT/fairseq/fairseq_cli/train.py" "$DATA" \
   --save-dir "$SAVE" -s $SRC -t $TGT \

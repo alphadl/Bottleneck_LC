@@ -34,7 +34,6 @@ python "$ROOT/fairseq/fairseq_cli/train.py" "$DATA_ROOT/bidirectional_KD" \
   --weight-decay 0 --clip-norm 0.1 --max-tokens 20000 --update-freq 3 --fp16 \
   --save-interval-updates 2000 --keep-last-epochs 1 --seed 1 $restore
 # Step 3: Forward KD (finetune from bidirectional)
-BIDIR_UPDATES="${BIDIR_UPDATES:-40000}"
 mkdir -p "$SAVE_ROOT/parallel_level"
 restore3=""
 [ -f "$SAVE_ROOT/bidirectional_KD/checkpoint_best.pt" ] && restore3="--restore-file $SAVE_ROOT/bidirectional_KD/checkpoint_best.pt"

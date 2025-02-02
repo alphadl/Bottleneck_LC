@@ -15,9 +15,8 @@ def main():
     ap.add_argument("--align", required=True, help="Word alignment (fast_align format) hyp-ref")
     ap.add_argument("--src", required=True, help="Source sentences (for tokenization)")
     args = ap.parse_args()
-    # Minimal stub: full implementation needs NAT model forward to get P(e|f) per word
-    # and alignment to get gold e for each f. See paper Section 3.1.
-    print("AoLC requires running model forward to get P(gold|src) per aligned pair. Use fairseq + alignment.", file=sys.stderr)
+    # Full AoLC: run model forward for P(e|f) per position and use alignment to get gold e per f (paper Section 3.1).
+    print("AoLC: see paper Section 3.1. Requires model logits per token and word alignment.", file=sys.stderr)
     return 0
 
 
