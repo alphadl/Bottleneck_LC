@@ -4,6 +4,8 @@ Official implementation for **"Widening The Bottleneck of Lexical Choice for Non
 
 We address lexical choice errors on low-frequency words in NAT by three approaches: (1) **Model Level** — data-dependent prior (WAD/SDD) with KL and λ decay; (2) **Parallel Data Level** — raw pretraining + bidirectional KD + forward KD (LFR); (3) **Monolingual Data Level** — bidirectional monolingual KD.
 
+This work extends our prior conference papers: [LCNAT](https://github.com/alphadl/LCNAT) (ICLR 2021), [RLFW-NAT](https://github.com/alphadl/RLFW-NAT) (ACL 2021), [RLFW-NAT.mono](https://github.com/alphadl/RLFW-NAT.mono) (ACL 2022).
+
 ## Setup
 
 ```bash
